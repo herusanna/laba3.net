@@ -11,56 +11,44 @@ namespace laba3.net
         Random r;
         public int x;
         public int y;
-        public int[] K;
+        public int K1;
+        public int K2;
         public int[] B;
         public int[] a;
         public int[] b;
-        int angle;
-        public int Angle { get => angle; set => angle = value; }
-
-        public void getPoints(int seed)
+        double angle;
+        public double Angle { get => angle; set => angle = value; }
+        public Straight()
         {
-            r = new Random(seed);
+            r = new Random();
             a = new int[2];
             b = new int[2];
-            x = r.Next(1, 6);
-            y = r.Next(1, 6);
-            for (int i = 0; i < 2; i++)
+            do
             {
-                a[i] = r.Next(1, 20);
-            }
-            for (int i = 0; i < 2; i++)
-            {
-                b[i] = r.Next(1, 20);
-            }
-        }
-        public void getCoefficient()
-        {
-            K = new int[2];
-            if (((x * a[1] - x * a[0]) != 0) && ((x * b[1] - x * b[0]) != 0))
-            {
-                K[0] = (y * (a[1] - a[0])) / (x * (a[1] - a[0]));
-                K[1] = (y * (b[1] - b[0])) / (x * (b[1] - b[0]));
-            }
+                x = r.Next(1, 6);
+                y = r.Next(1, 6);
+                if (x != 0)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        a[i] = r.Next(1, 10);
+                        b[i] = r.Next(1, 10);
+                    }
+                    K1 = (a[1] - a[0]) * (y / x);
+                    K2 = (b[1] - b[0]) * (y / x);
+                }
+            } while (K1 == 0 || K2 == 0 && (a[1] - a[0]) != (b[1] - b[0]));
             B = new int[2];
-            B[0] = a[0] * (-K[0] * x + y);
-            B[1] = b[0] * (-K[1] * x + y);
+            B[0] = a[0] * (-K1 * x + y);
+            B[1] = b[0] * (-K2 * x + y);
         }
         string getEquation()
         {
             string equa = "";
-            for (int i = 0; i < 2; i++)
-            {
-                equa += $"Y = {K[i]}X + {B[i]}\n";
-            }
+            equa += $"Y = {K1}X + {B[0]}\n";
+            equa += $"Y = {K2}X + {B[1]}\n";
             return equa;
         }
-        public double getAngle()
-        {
-            Angle = (K[0] - K[1]) / (1 + K[0] * K[1]);
-            return Math.Atan(Angle);
-        }
-
         public string showInfo()
         {
             string info = "";
@@ -77,40 +65,30 @@ namespace laba3.net
             }
             info += "---------------------------------------------------------\n";
             info += getEquation();
-            /*if (checkParallel() == true)
-                info += "Straight lines are parallel\n";
-            else
-                info += $"The angle between the lines = {getAngle()}\n";
-            */
             return info;
         }
-        public static Straight operator -(Straight x, Straight y)
+        public static double operator %(Straight x, Straight y)
         {
-            Straight res = new Straight();
-             res.Angle = x.K[0] - y.K[1];
-            return res;
+            double Angle = ((x.K1 - y.K2) / (1 + x.K1 * y.K2)) * 180 / Math.PI;
+            return Angle;
         }
-        public static Straight operator *(Straight x, Straight y)
+        public static bool operator ==(Straight x, Straight y)
         {
-            Straight res = new Straight();
-            res.Angle = x.K[0] * y.K[1];
-            return res;
+            bool isParalel = false;
+            if (x.K1 == y.K2)
+            {
+                isParalel = true;
+            }
+            return isParalel;
         }
-        public static Straight operator /(Straight x, Straight y)
+        public static bool operator !=(Straight x, Straight y)
         {
-            Straight res = new Straight();
-            res.Angle = (x.K[0] - y.K[1]) / (1 + x.K[0] * y.K[1]);
-            res.Angle = (int)Math.Atan(res.Angle);
-            return res;
+            bool isParalel = true;
+            if (x.K1 != y.K2)
+            {
+                isParalel = false;
+            }
+            return isParalel;
         }
-        /*
-        public static Straight operator false(Straight x, Straight y)
-        {          
-            //bool parallel = false;
-            if (x.K[0] == y.K[1])  //parallel = true;             
-            return true;
-        }
-        */
-    }    
+    }
 }
-

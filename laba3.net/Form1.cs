@@ -12,8 +12,7 @@ namespace laba3.net
 {
     public partial class Form1 : Form
     {
-        Random r = new Random();
-
+        int seed = 1;
         public Form1()
         {
             InitializeComponent();
@@ -26,21 +25,21 @@ namespace laba3.net
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            int seed = 0;
-            Straight straight = new Straight();
-            straight = new Straight();
-            straight.getPoints(seed++);
-            straight.getCoefficient();
-           // straight.getCoefficientB();
-            /* if (straight.checkParallel() == true)
-                 info += "Straight lines are parallel\n";
-             else
-                 info += $"The angle between the lines = {straight.getAngle()}\n";
-             */
-            checkLineBox.Text += straight.showInfo();
-
+            Straight s1 = new Straight();
+            Straight s2 = new Straight();
+            checkLineBox.Text = s1.showInfo();
+            checkLineBox.Text = s2.showInfo();
+            double s3 = s1 % s2;
+            
+            if (s1.K1 == s2.K2)
+            {
+                checkLineBox.Text += "The lines are parellel\n";
+            }
+            else if (s1.K1 != s2.K2)
+            {
+                checkLineBox.Text += "The lines are not parallel\n";
+                checkLineBox.Text += s3;
+            }
         }
-
-
     }
 }

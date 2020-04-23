@@ -13,7 +13,7 @@ namespace laba3.net
         public int y;
         public int K1;
         public int K2;
-        public int[] B;
+        public int B1, B2;
         public int[] a;
         public int[] b;
         double angle;
@@ -25,28 +25,27 @@ namespace laba3.net
             b = new int[2];
             do
             {
-                x = r.Next(1, 6);
-                y = r.Next(1, 6);
+                x = r.Next(1, 5);
+                y = r.Next(1, 5);
                 if (x != 0)
                 {
                     for (int i = 0; i < 2; i++)
                     {
-                        a[i] = r.Next(1, 10);
-                        b[i] = r.Next(1, 10);
+                        a[i] = r.Next(5, 10);
+                        b[i] = r.Next(5, 10);
                     }
                     K1 = (a[1] - a[0]) * (y / x);
                     K2 = (b[1] - b[0]) * (y / x);
                 }
             } while (K1 == 0 || K2 == 0 && (a[1] - a[0]) != (b[1] - b[0]));
-            B = new int[2];
-            B[0] = a[0] * (-K1 * x + y);
-            B[1] = b[0] * (-K2 * x + y);
+                B1 = a[0] * (-K1 * x + y);
+                B2 = b[0] * (-K2 * x + y);
         }
         string getEquation()
         {
             string equa = "";
-            equa += $"Y = {K1}X + {B[0]}\n";
-            equa += $"Y = {K2}X + {B[1]}\n";
+            equa += $"Y = {K1}X + {B1}\n";
+            equa += $"Y = {K2}X + {B2}\n";
             return equa;
         }
         public string showInfo()
@@ -67,9 +66,12 @@ namespace laba3.net
             info += getEquation();
             return info;
         }
+
         public static double operator %(Straight x, Straight y)
         {
-            double Angle = ((x.K1 - y.K2) / (1 + x.K1 * y.K2)) * 180 / Math.PI;
+            double Angle =(x.K2 - y.K1) / (1 + x.K1 * y.K2);
+            Angle = Math.Atan(Angle);
+            Angle = Angle * (180 / Math.PI);
             return Angle;
         }
         public static bool operator ==(Straight x, Straight y)

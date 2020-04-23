@@ -26,19 +26,18 @@ namespace laba3.net
         private void startButton_Click(object sender, EventArgs e)
         {
             Straight s1 = new Straight();
-            Straight s2 = new Straight();
+            Straight s2 = new Straight();           
             checkLineBox.Text = s1.showInfo();
             checkLineBox.Text = s2.showInfo();
-            double s3 = s1 % s2;
-            
+            double angle = s1 % s2;
             if (s1.K1 == s2.K2)
             {
-                checkLineBox.Text += "The lines are parellel\n";
+                checkLineBox.Text += "The lines are parallel\n";
             }
             else if (s1.K1 != s2.K2)
             {
                 checkLineBox.Text += "The lines are not parallel\n";
-                checkLineBox.Text += s3;
+                checkLineBox.Text += $"The angle between the lines: {angle}\n";               
             }
         }
     }

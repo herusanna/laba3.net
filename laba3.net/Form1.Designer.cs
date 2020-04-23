@@ -36,7 +36,7 @@
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.startButton.Location = new System.Drawing.Point(289, 12);
+            this.startButton.Location = new System.Drawing.Point(289, 2);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(142, 48);
             this.startButton.TabIndex = 0;
@@ -47,7 +47,7 @@
             // exitButton
             // 
             this.exitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.exitButton.Location = new System.Drawing.Point(289, 350);
+            this.exitButton.Location = new System.Drawing.Point(289, 362);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(142, 48);
             this.exitButton.TabIndex = 1;
@@ -58,9 +58,9 @@
             // checkLineBox
             // 
             this.checkLineBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.checkLineBox.Location = new System.Drawing.Point(120, 75);
+            this.checkLineBox.Location = new System.Drawing.Point(120, 64);
             this.checkLineBox.Name = "checkLineBox";
-            this.checkLineBox.Size = new System.Drawing.Size(480, 252);
+            this.checkLineBox.Size = new System.Drawing.Size(480, 283);
             this.checkLineBox.TabIndex = 2;
             this.checkLineBox.Text = "";
             // 
@@ -68,7 +68,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(726, 410);
+            this.ClientSize = new System.Drawing.Size(726, 422);
             this.Controls.Add(this.checkLineBox);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.startButton);

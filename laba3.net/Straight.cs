@@ -8,19 +8,20 @@ namespace laba3.net
 {
     class Straight
     {
-        Random r;
+       
         public int x;
         public int y;
-        public int K1;
-        public int K2;
-        public int B1, B2;
+        public double K1;
+        public double K2;
+        public double B1, B2;
         public int[] a;
         public int[] b;
         double angle;
+        
         public double Angle { get => angle; set => angle = value; }
-        public Straight()
+        public Straight(int seed)
         {
-            r = new Random();
+            Random r = new Random(seed);
             a = new int[2];
             b = new int[2];
             do
@@ -31,8 +32,8 @@ namespace laba3.net
                 {
                     for (int i = 0; i < 2; i++)
                     {
-                        a[i] = r.Next(5, 10);
-                        b[i] = r.Next(5, 10);
+                        a[i] = r.Next(1, 5);
+                        b[i] = r.Next(1, 5);
                     }
                     K1 = (a[1] - a[0]) * (y / x);
                     K2 = (b[1] - b[0]) * (y / x);
@@ -41,6 +42,7 @@ namespace laba3.net
                 B1 = a[0] * (-K1 * x + y);
                 B2 = b[0] * (-K2 * x + y);
         }
+        public Straight() { }
         string getEquation()
         {
             string equa = "";
@@ -72,6 +74,7 @@ namespace laba3.net
             double Angle =(x.K2 - y.K1) / (1 + x.K1 * y.K2);
             Angle = Math.Atan(Angle);
             Angle = Angle * (180 / Math.PI);
+            Angle = Math.Round(Angle);
             return Angle;
         }
         public static bool operator ==(Straight x, Straight y)
